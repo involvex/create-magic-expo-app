@@ -1,15 +1,9 @@
 # create-magic-expo-app
 
-To install dependencies:
+Monorepo for creating perfect Expo App.
 
-```bash
-bun install
-```
+## Tech
 
-To run:
+- Bun, Expo, uniwind, react, react-native, @shopify/react-native-skia, moti, react-navigation, react-native-gesture-handle, react-native-screens, react-native-web, expo-symbols, expo-status-bar, @expo/vector-icons, shadcn
 
-```bash
-bun run index.ts
-```
-
-This project was created using `bun init` in bun v1.3.9. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+-> Will be a "Create-Expo-App" Cli Command to generate an awesome preset for an Expo App with no cloud build dependencies (build local, paid services / no need for pay as you go or similiar)

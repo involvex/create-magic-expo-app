@@ -50,3 +50,7 @@ app/dist
 app/out
 app/node_modules/*
 app/node_modules/*/**
+
+.mira
+*.log
+*-log.txt
