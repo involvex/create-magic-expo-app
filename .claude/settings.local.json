@@ -6,7 +6,8 @@
       "Bash(pkill:*)",
       "Bash(\"D:\\\\repos\\\\involvex\\\\youtube-music-cli\\\\source\\\\utils\\\\constants.ts\":*)",
       "Bash(xxd:*)",
-      "Bash(bunx:*)"
+      "Bash(bunx:*)",
+      "Bash(./gradlew.bat:*)"
     ],
     "additionalDirectories": [
       "D:\\repos\\gtop\\"
