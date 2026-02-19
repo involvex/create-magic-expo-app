@@ -30,6 +30,7 @@
         "expo": "^56.0.0-canary-20260212-4f61309",
         "expo-router": "56.0.0-canary-20260212-4f61309",
         "expo-status-bar": "56.0.0-canary-20260212-4f61309",
+        "expo-system-ui": "56.0.0-canary-20260212-4f61309",
         "react": "19.2.3",
         "react-native": "0.84.0",
         "tailwindcss": "~4.1.16",
@@ -833,6 +834,8 @@
     "expo-status-bar": ["expo-status-bar@56.0.0-canary-20260212-4f61309", "", { "dependencies": { "react-native-is-edge-to-edge": "^1.2.1" }, "peerDependencies": { "react": "*", "react-native": "*" } }, "sha512-R0KsY6yoK7xS0iYpprNa7ZWBH2q+MBPTVlERshYE08cqkG1+dqqSEGZwAxwXIV9E2aZUq9DscG+8kh5Zx7Rkuw=="],
 
     "expo-symbols": ["expo-symbols@56.0.0-canary-20260212-4f61309", "", { "dependencies": { "@expo-google-fonts/material-symbols": "^0.4.1", "sf-symbols-typescript": "^2.0.0" }, "peerDependencies": { "expo": "56.0.0-canary-20260212-4f61309", "expo-font": "56.0.0-canary-20260212-4f61309", "react": "*", "react-native": "*" } }, "sha512-QLwFx1U2IH5+JRqB90dU3dOEK9P106q4+TQkehWv9FeHDMQMiuqPOxBngPNcE5A3AwI14pTh/d/OEBP2Kc/q7w=="],
+
+    "expo-system-ui": ["expo-system-ui@56.0.0-canary-20260212-4f61309", "", { "dependencies": { "@react-native/normalize-colors": "0.84.0", "debug": "^4.3.2" }, "peerDependencies": { "expo": "56.0.0-canary-20260212-4f61309", "react-native": "*", "react-native-web": "*" }, "optionalPeers": ["react-native-web"] }, "sha512-k/F3/UGQDhdyAqjOGoQrxkTptN8i36xmC8Pq5yX8Uh8BcRw2eQeC+Z9K6gresaKHnZXFJmFIlFHKLX0KKF8hiQ=="],
 
     "exponential-backoff": ["exponential-backoff@3.1.3", "", {}, "sha512-ZgEeZXj30q+I0EN+CbSSpIyPaJ5HVQD18Z1m+u1FXbAeT94mr1zw50q4q6jiiC447Nl/YTcIYSAftiGqetwXCA=="],
 
