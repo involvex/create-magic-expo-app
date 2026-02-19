@@ -57,7 +57,6 @@ export function DrawerNavigator({
   theme,
 }: DrawerNavigatorProps) {
   const primary = theme?.primary || "#007AFF";
-  const background = theme?.background || "#FFFFFF";
   const card = theme?.card || "#F2F2F7";
   const text = theme?.text || "#000000";
   const textSecondary = theme?.textSecondary || "#8E8E93";

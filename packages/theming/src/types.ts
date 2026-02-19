@@ -1,5 +1,3 @@
-import type { ColorSchemeName } from "react-native";
-
 /**
  * Available color schemes in the theme system.
  */

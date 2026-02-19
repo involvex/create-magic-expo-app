@@ -5,8 +5,6 @@
  * which allows you to use SF Symbols on iOS and equivalent icons on other platforms.
  */
 
-import type { SymbolWeight } from "expo-symbols";
-
 /**
  * Available symbol weights.
  */

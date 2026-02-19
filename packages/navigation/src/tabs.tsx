@@ -55,7 +55,6 @@ export interface TabNavigatorProps {
 export function TabNavigator({ children, theme }: TabNavigatorProps) {
   const primary = theme?.primary || "#007AFF";
   const secondary = theme?.secondary || "#8E8E93";
-  const background = theme?.background || "#FFFFFF";
   const card = theme?.card || "#F2F2F7";
   const text = theme?.text || "#000000";
   const border = theme?.border || "#C6C6C8";

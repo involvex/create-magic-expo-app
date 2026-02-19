@@ -12,13 +12,11 @@
     "dev": "tsc --watch"
   },
   "dependencies": {
-    "@magic-expo/config": "workspace:*",
-    "@magic-expo/templates": "workspace:*",
     "chalk": "^5.4.1",
     "eas-cli": "^14.3.0",
     "fs-extra": "^11.3.0",
     "prompts": "^2.4.2",
-    "validate-npm-package-name": "^6.0.0"
+    "validate-npm-package-name": "^5.0.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",

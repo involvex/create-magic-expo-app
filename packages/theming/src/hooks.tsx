@@ -1,8 +1,8 @@
 import { useColorScheme as useRNColorScheme, Appearance } from "react-native";
-import { useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { createTheme, darkTheme, lightTheme } from "./types";
+import { useCallback, useContext, useEffect, useState } from "react";
 import type { ColorScheme, Theme } from "./types";
 import ThemeContext from "./ThemeContext";
+import { createTheme } from "./types";
 
 /**
  * Theme provider props.
