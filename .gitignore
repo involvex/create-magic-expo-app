@@ -54,3 +54,5 @@ app/node_modules/*/**
 .mira
 *.log
 *-log.txt
+
+packages/app/.expo
