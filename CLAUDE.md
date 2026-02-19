@@ -5,6 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Development Commands
 
 ### Pre-build validation (always run before committing)
+
 ```bash
 bun run format      # Prettier formatting with import organization
 bun run lint        # ESLint checks
@@ -13,6 +14,7 @@ bun run typecheck   # TypeScript compiler checks (noEmit)
 ```
 
 ### Building
+
 ```bash
 bun run build       # Full build: format + lint:fix + typecheck + build:shared + build:app
 bun run build:app   # Build Expo workspace (packages/create-magic-expo-app)
@@ -20,6 +22,7 @@ bun run build:shared # Build shared workspace
 ```
 
 ### Running the app
+
 ```bash
 bun run -F create-magic-expo-app start   # Expo dev server
 bun run -F create-magic-expo-app web     # Web platform
@@ -28,6 +31,7 @@ bun run -F create-magic-expo-app ios     # iOS platform
 ```
 
 ### Maintenance
+
 ```bash
 bun run clean       # Remove node_modules and dist folders
 bun run changelog   # Update CHANGELOG.md with conventional commits
@@ -38,11 +42,13 @@ bun run changelog   # Update CHANGELOG.md with conventional commits
 This is a **Bun workspace monorepo** for creating a "Create-Expo-App" CLI tool. The project uses Expo SDK 56 (canary) with React Native 0.84 and modern tooling.
 
 ### Monorepo structure
+
 - Root: Orchestrates formatting, linting, type checking, and build orchestration
 - `packages/app/`: Main Expo Router workspace with Uniwind styling
 - `packages/shared/`: Placeholder for shared CLI logic or reusable UI (currently empty)
 
 ### Tech stack
+
 - **Runtime**: Bun (package management and execution)
 - **Framework**: Expo SDK 56 (canary) with Expo Router for file-based routing
 - **UI**: React 19.2.3 + React Native 0.84

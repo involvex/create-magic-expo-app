@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Create Magic Expo App Docs</title>
+  <meta name="description" content="Documentation for the Create Magic Expo App CLI – a Bun monorepo with Expo Router and Uniwind" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #6c63ff;
+      --accent: #ff7f50;
+      --surface-light: #f8f8ff;
+      --surface: #ffffff;
+      --muted: #94a3b8;
+      --text: #0f172a;
+      --border: rgba(108, 99, 255, 0.15);
+      --sidebar-width: 220px;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface-light: #0f172a;
+        --surface: #1e293b;
+        --text: #f1f5f9;
+        --muted: #64748b;
+        --border: rgba(148, 163, 184, 0.2);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--surface-light);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: var(--sidebar-width);
+      height: 100vh;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+      overflow-y: auto;
+      z-index: 100;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .sidebar-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 2.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .sidebar nav a {
+      color: var(--text);
+      text-decoration: none;
+      padding: 0.65rem 1rem;
+      border-radius: 8px;
+      font-size: 0.925rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      border-left: 3px solid transparent;
+    }
+
+    .sidebar nav a:hover {
+      background: rgba(108, 99, 255, 0.08);
+      transform: translateX(2px);
+    }
+
+    .sidebar nav a.active {
+      background: rgba(108, 99, 255, 0.12);
+      border-left-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* Mobile menu toggle */
+    .menu-toggle {
+      display: none;
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      z-index: 200;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.65rem 0.85rem;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--text);
+      margin: 4px 0;
+      transition: 0.3s;
+    }
+
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 90;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .sidebar {
+        transform: translateX(-100%);
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .sidebar-overlay.visible {
+        display: block;
+      }
+    }
+
+    /* Main content */
+    .main-content {
+      margin-left: var(--sidebar-width);
+      padding: 0;
+      min-height: 100vh;
+    }
+
+    @media (max-width: 768px) {
+      .main-content {
+        margin-left: 0;
+      }
+    }
+
+    /* Hero section */
+    .hero {
+      background: radial-gradient(ellipse at top, rgba(108, 99, 255, 0.15), transparent 60%),
+                  linear-gradient(135deg, var(--surface-light), #fef3f0);
+      padding: 5rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255, 127, 80, 0.15), transparent 70%);
+      border-radius: 50%;
+      animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-30px, -30px) scale(1.1); }
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(108, 99, 255, 0.1);
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(108, 99, 255, 0.2);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--text), var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.125rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      padding: 0.95rem 1.75rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.975rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 14px rgba(108, 99, 255, 0.4),
+                  0 1px 3px rgba(0, 0, 0, 0.1),
+                  inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(108, 99, 255, 0.5),
+                  0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-secondary {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 4px 14px rgba(255, 127, 80, 0.4),
+                  0 1px 3px rgba(0, 0, 0, 0.1),
+                  inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 127, 80, 0.5),
+                  0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Content sections */
+    .content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+    section {
+      margin-bottom: 4rem;
+      animation: fadeIn 0.6s ease-out;
+      animation-fill-mode: both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    section:nth-child(1) { animation-delay: 0.1s; }
+    section:nth-child(2) { animation-delay: 0.2s; }
+    section:nth-child(3) { animation-delay: 0.3s; }
+    section:nth-child(4) { animation-delay: 0.4s; }
+
+    .section-header {
+      margin-bottom: 2rem;
+    }
+
+    .section-header h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03),
+                  0 1px 3px rgba(0, 0, 0, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08),
+                  0 4px 8px rgba(0, 0, 0, 0.06);
+      border-color: rgba(108, 99, 255, 0.3);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+
+    .card p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .card code {
+      background: rgba(108, 99, 255, 0.08);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.875rem;
+      color: var(--primary);
+    }
+
+    /* Changelog */
+    .changelog-loading {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .skeleton {
+      background: linear-gradient(90deg, 
+        var(--surface) 0%, 
+        rgba(108, 99, 255, 0.05) 50%, 
+        var(--surface) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 12px;
+      height: 120px;
+      border: 1px solid var(--border);
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    #changelog-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    #changelog-content h2 {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      padding: 0.5rem 1.25rem;
+      border-radius: 50px;
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3);
+    }
+
+    #changelog-content ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    #changelog-content li {
+      padding-left: 1.75rem;
+      position: relative;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    #changelog-content li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    #changelog-content code {
+      background: rgba(108, 99, 255, 0.08);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.875rem;
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    #changelog-content p {
+      color: var(--muted);
+      margin: 0.5rem 0;
+    }
+
+    .changelog-error {
+      color: var(--muted);
+      font-style: italic;
+      padding: 2rem;
+      text-align: center;
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+    }
+
+    /* Security section */
+    .security-section {
+      background: linear-gradient(135deg, rgba(108, 99, 255, 0.05), rgba(255, 127, 80, 0.05));
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    .security-section p {
+      line-height: 1.8;
+      color: var(--text);
+    }
+
+    .security-section a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    .security-section a:hover {
+      border-bottom-color: var(--primary);
+    }
+
+    .security-section code {
+      background: rgba(108, 99, 255, 0.08);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.875rem;
+      color: var(--primary);
+    }
+
+    /* Support links */
+    .support-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      list-style: none;
+      margin-top: 1.5rem;
+    }
+
+    .support-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    }
+
+    .support-links a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.925rem;
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    footer a:hover {
+      color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 4rem 1.5rem 3rem;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .content {
+        padding: 2rem 1.5rem;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .support-links {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Mobile menu toggle -->
+  <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <!-- Sidebar overlay for mobile -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">create-magic-expo</div>
+    <nav>
+      <a href="#overview" data-section="overview">Overview</a>
+      <a href="#features" data-section="features">Features</a>
+      <a href="#changelog" data-section="changelog">Changelog</a>
+      <a href="#security" data-section="security">Security</a>
+      <a href="#support" data-section="support">Support</a>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <div class="main-content">
+    <!-- Hero -->
+    <header class="hero" id="overview">
+      <div class="hero-content">
+        <div class="hero-badge">Bun monorepo · Expo Router · Uniwind · Claude-ready</div>
+        <h1>Docs for the Create Magic Expo App CLI</h1>
+        <p>
+          Modern material-inspired documentation with dynamic changelog loading, 
+          comprehensive security guardrails, and full transparency into the project's funding and roadmap.
+        </p>
+        <div class="hero-buttons">
+          <a href="https://github.com/involvex/create-magic-expo-app/blob/main/Plan.md" 
+             class="btn btn-primary" 
+             target="_blank" 
+             rel="noopener noreferrer">
+            View the plan →
+          </a>
+          <a href="https://github.com/involvex/create-magic-expo-app/blob/main/Security.md" 
+             class="btn btn-secondary" 
+             target="_blank" 
+             rel="noopener noreferrer">
+            See the security doc →
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content sections -->
+    <div class="content">
+      <!-- Features -->
+      <section id="features">
+        <div class="section-header">
+          <h2>Features</h2>
+          <p class="section-subtitle">
+            Everything your CLI, UI, and documentation workstreams need in one Bun-powered monorepo.
+          </p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <h3>Material docs</h3>
+            <p>
+              A responsive two-column layout with sticky sidebar navigation, gradient surfaces, 
+              and elevated cards that make this feel like a modern Expo Router companion 
+              instead of a raw repo view.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Roadmap & plan</h3>
+            <p>
+              The CLI architecture, workspace structure, and future features derive from 
+              <code>Plan.md</code>, ensuring the documentation iterates the same narrative 
+              as the codebase.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Security & automation</h3>
+            <p>
+              Bun audit, Dependabot, lint, typecheck, and Expo builds run on every push 
+              through the security workflow. Claude validates changes before they reach 
+              <code>main</code>.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Changelog -->
+      <section id="changelog">
+        <div class="section-header">
+          <h2>Live changelog</h2>
+          <p class="section-subtitle">
+            Release highlights fetched dynamically from Markdown, keeping the page in sync with git history.
+          </p>
+        </div>
+        <div class="changelog-loading" id="changelogLoading">
+          <div class="skeleton"></div>
+          <div class="skeleton"></div>
+        </div>
+        <div id="changelog-content"></div>
+      </section>
+
+      <!-- Security -->
+      <section id="security">
+        <div class="section-header">
+          <h2>Security</h2>
+          <p class="section-subtitle">
+            Bun audit, Dependabot, Claude hooks, and a documented disclosure path.
+          </p>
+        </div>
+        <div class="security-section">
+          <p>
+            Every change touches Bun audit, lint, typecheck, and build commands before 
+            merging into <code>main</code>. Dependabot monitors <code>bun.lockb</code> 
+            and GitHub Actions weekly for vulnerabilities. See 
+            <a href="https://github.com/involvex/create-magic-expo-app/blob/main/Security.md" 
+               target="_blank" 
+               rel="noopener noreferrer">Security.md</a> 
+            for complete guardrails and security reporting instructions.
+          </p>
+        </div>
+      </section>
+
+      <!-- Support -->
+      <section id="support">
+        <div class="section-header">
+          <h2>Support</h2>
+          <p class="section-subtitle">
+            This CLI stays free thanks to sponsors and supporters listed in 
+            <code>.github/FUNDING.yml</code>. Your contributions help maintain and improve the project.
+          </p>
+        </div>
+        <ul class="support-links">
+          <li>
+            <a href="https://github.com/sponsors/involvex" 
+               target="_blank" 
+               rel="noopener noreferrer">
+              GitHub Sponsors
+            </a>
+          </li>
+          <li>
+            <a href="https://buymeacoffee.com/involvex" 
+               target="_blank" 
+               rel="noopener noreferrer">
+              Buy Me a Coffee
+            </a>
+          </li>
+          <li>
+            <a href="https://paypal.me/involvex" 
+               target="_blank" 
+               rel="noopener noreferrer">
+              PayPal
+            </a>
+          </li>
+          <li>
+            <a href="https://rewards.bing.com/welcome?rh=14525F68&ref=rafsrchae&form=ML2XE3&OCID=ML2XE3&PUBL=RewardsDO&CREA=ML2XE3" 
+               target="_blank" 
+               rel="noopener noreferrer">
+              Microsoft Rewards
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      Built with Bun + Expo Router + Uniwind · Source on 
+      <a href="https://github.com/involvex/create-magic-expo-app" 
+         target="_blank" 
+         rel="noopener noreferrer">GitHub</a>
+    </footer>
+  </div>
+
+  <!-- marked.js for markdown parsing -->
+  <script src="https://unpkg.com/marked@9/marked.min.js"></script>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+      sidebarOverlay.classList.toggle('visible');
+    });
+
+    sidebarOverlay.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      sidebarOverlay.classList.remove('visible');
+    });
+
+    // Close sidebar when clicking nav link on mobile
+    document.querySelectorAll('.sidebar nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          sidebar.classList.remove('open');
+          sidebarOverlay.classList.remove('visible');
+        }
+      });
+    });
+
+    // Scroll spy for active nav links
+    const sections = document.querySelectorAll('section[id], header[id]');
+    const navLinks = document.querySelectorAll('.sidebar nav a');
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -70% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('data-section') === entry.target.id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => observer.observe(section));
+
+    // Dynamic changelog loading
+    async function loadChangelog() {
+      const changelogContent = document.getElementById('changelog-content');
+      const loadingSkeleton = document.getElementById('changelogLoading');
+      const sources = ['changelog.md', '../CHANGELOG.md'];
+      
+      let markdown = '';
+
+      // Try to fetch from sources
+      for (const source of sources) {
+        try {
+          const response = await fetch(source);
+          if (response.ok) {
+            markdown = await response.text();
+            break;
+          }
+        } catch (error) {
+          console.warn(`Failed to fetch ${source}:`, error);
+        }
+      }
+
+      // Hide loading skeleton
+      loadingSkeleton.style.display = 'none';
+
+      if (!markdown) {
+        changelogContent.innerHTML = '<div class="changelog-error">Changelog not available at the moment.</div>';
+        return;
+      }
+
+      try {
+        // Parse markdown with marked.js
+        const html = marked.parse(markdown);
+        changelogContent.innerHTML = html;
+      } catch (error) {
+        console.error('Failed to parse markdown:', error);
+        changelogContent.innerHTML = '<div class="changelog-error">Failed to parse changelog.</div>';
+      }
+    }
+
+    // Load changelog when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadChangelog);
+    } else {
+      loadChangelog();
+    }
+  </script>
+</body>
+</html>

@@ -1,13 +1,24 @@
 {
-	"permissions": {
-		"allow": [
-			"Bash(bun:*)",
-			"Bash(jobs:*)",
-			"Bash(pkill:*)",
-			"Bash(\"D:\\\\repos\\\\involvex\\\\youtube-music-cli\\\\source\\\\utils\\\\constants.ts\":*)",
-			"Bash(xxd:*)"
-		],
-		"additionalDirectories": ["D:\\repos\\gtop\\"]
-	},
-	"prefersReducedMotion": true
+  "permissions": {
+    "allow": [
+      "Bash(bun:*)",
+      "Bash(jobs:*)",
+      "Bash(pkill:*)",
+      "Bash(\"D:\\\\repos\\\\involvex\\\\youtube-music-cli\\\\source\\\\utils\\\\constants.ts\":*)",
+      "Bash(xxd:*)",
+      "Bash(bunx:*)"
+    ],
+    "additionalDirectories": [
+      "D:\\repos\\gtop\\"
+    ]
+  },
+  "hooks": {
+    "onTaskComplete": [
+      "bun run format",
+      "bun run lint",
+      "bun run typecheck",
+      "bun run build:app"
+    ]
+  },
+  "prefersReducedMotion": true
 }
