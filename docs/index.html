@@ -684,6 +684,24 @@
         line-height: 1.7;
       }
 
+      .command-highlight {
+        display: inline-block;
+        margin-top: 0.4rem;
+        padding: 0.55rem 0.8rem;
+        border-radius: 10px;
+        background: linear-gradient(
+          135deg,
+          rgba(108, 99, 255, 0.14),
+          rgba(255, 127, 80, 0.14)
+        );
+        border: 1px solid color-mix(in srgb, var(--primary) 24%, transparent);
+      }
+
+      .command-highlight code {
+        font-size: 0.92rem;
+        font-weight: 700;
+      }
+
       .changelog-error {
         color: var(--muted);
         font-style: italic;
@@ -962,6 +980,10 @@
             <ul>
               <li>Node.js 18+ installed</li>
               <li>Bun installed globally</li>
+              <li>Java JDK 17 installed and configured</li>
+              <li>Android SDK installed (with platform-tools/build-tools)</li>
+              <li>Android NDK installed for native modules</li>
+              <li>ADB available in your PATH (<code>adb devices</code>)</li>
               <li>
                 Expo Go app on your phone (optional, but useful for quick
                 testing)
@@ -969,7 +991,9 @@
             </ul>
             <h3>Create your app</h3>
             <p>Run the CLI starter command:</p>
-            <p><code>npx create-magic-expo-app myapp</code></p>
+            <p class="command-highlight">
+              <code>npx create-magic-expo-app myapp</code>
+            </p>
             <h3>Run locally</h3>
             <p>
               Move into the project and start Expo:
