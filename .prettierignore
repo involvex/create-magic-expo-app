@@ -17,3 +17,4 @@ packages/app/out
 .cline
 .gemini
 .kilocode
+packages/app/android/.gradle

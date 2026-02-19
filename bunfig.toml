@@ -11,8 +11,8 @@ registry = "https://registry.npmjs.org/"
 # Set node_modules folder
 # node_modules = "node_modules"
 
-# Cache directory
-cache = "node_modules/.cache/bun"
+# Cache directory - use shorter path to avoid Android build path length issues
+cache = "D:\\temp\\bun"
 
 [test]
 # Test runner configuration
