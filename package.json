@@ -1,0 +1,34 @@
+{
+  "name": "create-magic-expo-app",
+  "private": true,
+  "funding": "https://github.com/sponsors/involvex",
+  "author": {
+    "name": "involvex"
+  },
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "format": "prettier . --write",
+    "lint:fix": "eslint --fix .",
+    "prebuild": "bun run format && bun run lint:fix && bun run typecheck",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "clean": "rimraf node_modules packages/app/node_modules packages/*/node_modules packages/*/dist"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "prettier": "^3.8.1",
+    "prettier-plugin-organize-imports": "^4.3.0",
+    "prettier-plugin-packagejson": "^3.0.0",
+    "prettier-plugin-sort-imports": "^1.8.11",
+    "rimraf": "^6.1.3"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "sponsor": {
+    "url": "https://github.com/sponsors/involvex"
+  }
+}
