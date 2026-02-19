@@ -1,0 +1,112 @@
+/**
+ * Global CSS file for Uniwind integration.
+ * Import this in your app's entry point to enable Tailwind utilities.
+ *
+ * @example
+ * ```tsx
+ * // In your app/_layout.tsx or app.tsx
+ * import "@magic-expo/theme/global.css";
+ * ```
+ */
+@import "tailwindcss";
+@import "uniwind";
+
+/* Custom theme variables for CSS access */
+:root {
+  --color-primary: #007aff;
+  --color-secondary: #5856d6;
+  --color-accent: #ff9500;
+  --color-background: #ffffff;
+  --color-foreground: #000000;
+  --color-text: #000000;
+  --color-text-secondary: #8e8e93;
+  --color-border: #c6c6c8;
+  --color-success: #34c759;
+  --color-warning: #ff9500;
+  --color-error: #ff3b30;
+  --color-info: #5ac8fa;
+}
+
+.dark {
+  --color-primary: #0a84ff;
+  --color-secondary: #5e5ce6;
+  --color-accent: #ff9f0a;
+  --color-background: #000000;
+  --color-foreground: #ffffff;
+  --color-text: #ffffff;
+  --color-text-secondary: #8e8e93;
+  --color-border: #38383a;
+  --color-success: #32d74b;
+  --color-warning: #ff9f0a;
+  --color-error: #ff453a;
+  --color-info: #64d2ff;
+}
+
+/* Custom utility classes */
+@layer utilities {
+  .text-primary {
+    color: var(--color-primary);
+  }
+  .text-secondary {
+    color: var(--color-secondary);
+  }
+  .text-accent {
+    color: var(--color-accent);
+  }
+  .text-success {
+    color: var(--color-success);
+  }
+  .text-warning {
+    color: var(--color-warning);
+  }
+  .text-error {
+    color: var(--color-error);
+  }
+  .text-info {
+    color: var(--color-info);
+  }
+
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+  .bg-secondary {
+    background-color: var(--color-secondary);
+  }
+  .bg-accent {
+    background-color: var(--color-accent);
+  }
+  .bg-success {
+    background-color: var(--color-success);
+  }
+  .bg-warning {
+    background-color: var(--color-warning);
+  }
+  .bg-error {
+    background-color: var(--color-error);
+  }
+  .bg-info {
+    background-color: var(--color-info);
+  }
+
+  .border-primary {
+    border-color: var(--color-primary);
+  }
+  .border-secondary {
+    border-color: var(--color-secondary);
+  }
+  .border-accent {
+    border-color: var(--color-accent);
+  }
+  .border-success {
+    border-color: var(--color-success);
+  }
+  .border-warning {
+    border-color: var(--color-warning);
+  }
+  .border-error {
+    border-color: var(--color-error);
+  }
+  .border-info {
+    border-color: var(--color-info);
+  }
+}

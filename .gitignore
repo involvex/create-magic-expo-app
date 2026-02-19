@@ -1,0 +1,66 @@
+# dependencies (bun install)
+node_modules
+
+# output
+out
+dist
+*.tgz
+
+# code coverage
+coverage
+*.lcov
+
+# logs
+logs
+_.log
+report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
+
+# dotenv environment variable files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# caches
+.eslintcache
+.cache
+*.tsbuildinfo
+
+# IntelliJ based IDEs
+.idea
+
+# Finder (MacOS) folder config
+.DS_Store
+
+*/node_modules
+*/dist
+*/out
+*/coverage
+*/logs
+*/.env
+*/.env.local
+*/.eslintcache
+*/.cache
+*/.tsbuildinfo
+*/.idea
+*/.DS_Store
+app/node_modules
+app/dist
+app/out
+app/node_modules/*
+app/node_modules/*/**
+
+.mira
+*.log
+*-log.txt
+
+packages/app/.expo
+
+.claude
+.cline
+.gemini
+.kilocode
+
+.mcp.json
+.claude/settings.local.json

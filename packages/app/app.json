@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "scheme": "acme",
+    "userInterfaceStyle": "automatic",
+    "orientation": "default",
+    "web": {
+      "output": "static",
+      "favicon": "../../assets/favicon.png"
+    },
+    "name": "create-magic-expo-app",
+    "slug": "create-magic-expo-app",
+    "icon": "../../assets/icon.png",
+    "newArchEnabled": true,
+    "plugins": ["expo-router"],
+    "android": {
+      "package": "com.involvex.createmagicexpoapp",
+      "adaptiveIcon": {
+        "foregroundImage": "../../assets/icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    }
+  }
+}

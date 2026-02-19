@@ -1,0 +1,26 @@
+{
+  "name": "@magic-expo/cli",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CLI tool for scaffolding professional Expo applications",
+  "type": "module",
+  "bin": {
+    "create-magic-expo-app": "./bin/create-magic-expo-app.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "eas-cli": "^14.3.0",
+    "fs-extra": "^11.3.0",
+    "prompts": "^2.4.2",
+    "validate-npm-package-name": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/prompts": "^2.4.9",
+    "@types/validate-npm-package-name": "^4.0.2"
+  }
+}

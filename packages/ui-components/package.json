@@ -1,0 +1,23 @@
+{
+  "name": "@magic-expo/ui-components",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Reusable UI components for Magic Expo apps",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "expo": "^56.0.0-canary-20260212-4f61309",
+    "react": "19.2.3",
+    "react-native": "0.84.0",
+    "react-native-safe-area-context": "~4.14.0"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-native": "^0.84.0"
+  }
+}
