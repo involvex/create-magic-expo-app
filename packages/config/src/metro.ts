@@ -1,6 +1,3 @@
-// Re-export uniwind's Metro config generator
-export { withUniwindConfig } from "uniwind/metro";
-
 interface MetroConfigOptions {
   cssEntryFile?: string;
   dtsFile?: string;
@@ -9,7 +6,6 @@ interface MetroConfigOptions {
 
 /**
  * Options for configuring Uniwind with Metro.
- * Use this with uniwind's `withUniwindConfig` function.
  */
 export type { MetroConfigOptions };
 
@@ -33,4 +29,28 @@ export function getUniwindOptions(options: MetroConfigOptions = {}) {
   };
 }
 
-export default { withUniwindConfig, getUniwindOptions };
+/**
+ * Helper function to apply Uniwind configuration to a Metro config.
+ * This is a convenience wrapper around uniwind's withUniwindConfig.
+ *
+ * Usage in your metro.config.js:
+ * ```js
+ * import { withUniwindConfig } from 'uniwind/metro';
+ * import { getDefaultConfig } from 'expo/metro-config';
+ * import { getUniwindOptions } from '@magic-expo/config';
+ *
+ * const config = getDefaultConfig(__dirname);
+ * export default withUniwindConfig(config, getUniwindOptions());
+ * ```
+ */
+export function withUniwindConfig() {
+  // This is a placeholder - the actual implementation uses uniwind's withUniwindConfig
+  // The consumer should use the pattern shown in the JSDoc above
+  throw new Error(
+    "withUniwindConfig is not directly importable from @magic-expo/config. " +
+      "Please use: `import { withUniwindConfig } from 'uniwind/metro'` " +
+      "and `import { getUniwindOptions } from '@magic-expo/config'`",
+  );
+}
+
+export default { getUniwindOptions, withUniwindConfig };
