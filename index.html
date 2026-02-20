@@ -201,6 +201,12 @@
         line-height: 1;
       }
 
+      .theme-hint {
+        margin-top: 0.6rem;
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+
       /* Hero banner */
       .hero-banner {
         max-width: 900px;
@@ -905,15 +911,16 @@
       <button
         class="theme-toggle"
         id="themeToggle"
-        aria-label="Toggle dark/light mode"
+        aria-label="Cycle theme mode"
       >
         <span
           class="theme-toggle-icon"
           id="themeIcon"
-          >🌙</span
+          >🖥️</span
         >
-        <span id="themeLabel">Dark mode</span>
+        <span id="themeLabel">Theme: System</span>
       </button>
+      <p class="theme-hint">Matches app theme options: system, light, dark.</p>
     </aside>
 
     <!-- Main content -->
@@ -930,7 +937,8 @@
           <h1>Create Magic Expo App CLI</h1>
           <p>
             Scaffold a new Expo app fast, understand the stack, and launch a
-            polished React Native project with Bun, Expo Router, and Uniwind.
+            polished React Native project with Bun, Expo Router, Uniwind, and a
+            showcase settings experience.
           </p>
           <div class="hero-buttons">
             <a
@@ -995,6 +1003,17 @@
             <p class="command-highlight">
               <code>npx create-magic-expo-app myapp</code>
             </p>
+            <p>
+              Skip prompts and generate a minimum template quickly:
+              <code>npx create-magic-expo-app myapp -y</code>
+            </p>
+            <p>
+              Generate a showcase app with tabs and local-first build defaults:
+              <code
+                >npx create-magic-expo-app myapp --template showcase
+                --navigation tabs --build-provider local</code
+              >
+            </p>
             <h3>Run locally</h3>
             <p>
               Move into the project and start Expo:
@@ -1005,6 +1024,14 @@
               <code>bun run web</code>, <code>bun run ios</code>, or
               <code>bun run android</code>.
             </p>
+            <h3>Showcase features included</h3>
+            <ul>
+              <li>Working tab navigation and routed feature screens</li>
+              <li>Theme switching with system / light / dark modes</li>
+              <li>Settings toggles for notification preferences</li>
+              <li>Cache reset controls and default settings restore</li>
+              <li>Sample GitHub/Discord OAuth sign-in flow</li>
+            </ul>
           </div>
         </section>
 
@@ -1247,32 +1274,47 @@
         loadChangelog();
       }
 
-      // Theme toggle
+      // Theme toggle (system -> light -> dark) to mirror app settings
       const themeToggleBtn = document.getElementById("themeToggle");
       const themeIcon = document.getElementById("themeIcon");
       const themeLabel = document.getElementById("themeLabel");
+      const themeModes = ["system", "light", "dark"];
 
-      function applyTheme(dark) {
-        document.documentElement.setAttribute(
-          "data-theme",
-          dark ? "dark" : "light",
-        );
-        themeIcon.textContent = dark ? "☀️" : "🌙";
-        themeLabel.textContent = dark ? "Light mode" : "Dark mode";
+      function applyTheme(mode) {
+        const htmlEl = document.documentElement;
+        if (mode === "system") {
+          htmlEl.removeAttribute("data-theme");
+          themeIcon.textContent = "🖥️";
+          themeLabel.textContent = "Theme: System";
+          return;
+        }
+
+        htmlEl.setAttribute("data-theme", mode);
+        themeIcon.textContent = mode === "dark" ? "🌙" : "☀️";
+        themeLabel.textContent =
+          mode === "dark" ? "Theme: Dark" : "Theme: Light";
       }
 
-      // Init: saved preference → system preference
-      const saved = localStorage.getItem("theme");
-      const systemDark = window.matchMedia(
-        "(prefers-color-scheme: dark)",
-      ).matches;
-      applyTheme(saved ? saved === "dark" : systemDark);
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      const saved = localStorage.getItem("theme-preference");
+      const initialMode = themeModes.includes(saved) ? saved : "system";
+      applyTheme(initialMode);
 
       themeToggleBtn.addEventListener("click", () => {
-        const isDark =
-          document.documentElement.getAttribute("data-theme") === "dark";
-        applyTheme(!isDark);
-        localStorage.setItem("theme", !isDark ? "dark" : "light");
+        const currentMode =
+          localStorage.getItem("theme-preference") || "system";
+        const currentIndex = themeModes.indexOf(currentMode);
+        const nextMode = themeModes[(currentIndex + 1) % themeModes.length];
+        localStorage.setItem("theme-preference", nextMode);
+        applyTheme(nextMode);
+      });
+
+      mediaQuery.addEventListener("change", () => {
+        if (
+          (localStorage.getItem("theme-preference") || "system") === "system"
+        ) {
+          applyTheme("system");
+        }
       });
     </script>
   </body>
