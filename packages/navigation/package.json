@@ -23,19 +23,17 @@
     "@react-navigation/bottom-tabs": "^7.3.10",
     "@react-navigation/drawer": "^7.2.1",
     "@react-navigation/native": "^7.1.6",
-    "@react-navigation/stack": "^7.2.1",
-    "expo": "^56.0.0-canary-20260212-4f61309",
-    "expo-router": "56.0.0-canary-20260212-4f61309",
-    "react": "19.2.3",
-    "react-native": "0.84.0",
-    "react-native-gesture-handler": "~2.22.0",
-    "react-native-reanimated": "~4.0.1",
-    "react-native-safe-area-context": "~4.14.0",
-    "react-native-screens": "~3.35.0"
+    "@react-navigation/stack": "^7.2.1"
   },
   "peerDependencies": {
-    "react": "^19.0.0",
-    "react-native": "^0.84.0"
+    "expo": ">=55.0.0",
+    "expo-router": ">=55.0.0",
+    "react": ">=19.0.0",
+    "react-native": ">=0.83.0",
+    "react-native-gesture-handler": ">=2.0.0",
+    "react-native-reanimated": ">=3.0.0",
+    "react-native-safe-area-context": ">=4.0.0",
+    "react-native-screens": ">=3.0.0"
   },
   "publishConfig": {
     "access": "public",

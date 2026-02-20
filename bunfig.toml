@@ -8,8 +8,8 @@
 # Set default registry
 registry = "https://registry.npmjs.org/"
 
-# Set node_modules folder
-# node_modules = "node_modules"
+# Use hardlink backend to reduce virtual-package duplication warnings from expo-doctor
+backend = "hardlink"
 
 # Cache directory - use shorter path to avoid Android build path length issues
 cache = "D:\\temp\\bun"

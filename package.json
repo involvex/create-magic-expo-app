@@ -25,6 +25,7 @@
   "scripts": {
     "prebuild": "bun run format && bun run lint:fix && bun run typecheck",
     "build": "bun run build:config && bun run build:theming && bun run build:navigation && bun run build:ui-components && bun run build:templates && bun run build:cli && echo '✓ All packages built successfully'",
+    "prebuild:app": "bun run -F @magic-expo/app prebuild",
     "build:app": "bun run -F @magic-expo/app build",
     "build:cli": "bun run -F @magic-expo/cli build",
     "build:config": "bun run -F @magic-expo/config build",

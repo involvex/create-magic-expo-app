@@ -57,6 +57,10 @@ app/node_modules/*/**
 
 packages/app/.expo
 
+# Generated native project folders (managed CNG workflow — regenerate with expo prebuild)
+packages/app/android
+packages/app/ios
+
 .claude
 .cline
 .gemini

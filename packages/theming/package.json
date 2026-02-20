@@ -20,16 +20,14 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "expo": "^56.0.0-canary-20260212-4f61309",
-    "expo-symbols": "^56.0.0-canary-20260212-4f61309",
-    "react": "19.2.3",
-    "react-native": "0.84.0",
     "tailwindcss": "~4.1.16",
     "uniwind": "~1.0.0"
   },
   "peerDependencies": {
-    "react": "^19.0.0",
-    "react-native": "^0.84.0"
+    "expo": ">=55.0.0",
+    "expo-symbols": ">=55.0.0",
+    "react": ">=19.0.0",
+    "react-native": ">=0.83.0"
   },
   "publishConfig": {
     "access": "public",
