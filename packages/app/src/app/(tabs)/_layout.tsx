@@ -13,7 +13,7 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Home",
-          tabBarIcon: ({ color }) => (
+          tabBarIcon: ({ color }: { color: string }) => (
             <Ionicons
               name="home"
               size={24}
@@ -26,7 +26,7 @@ export default function TabLayout() {
         name="features"
         options={{
           title: "Features",
-          tabBarIcon: ({ color }) => (
+          tabBarIcon: ({ color }: { color: string }) => (
             <Ionicons
               name="list"
               size={24}
@@ -39,7 +39,7 @@ export default function TabLayout() {
         name="components"
         options={{
           title: "Components",
-          tabBarIcon: ({ color }) => (
+          tabBarIcon: ({ color }: { color: string }) => (
             <Ionicons
               name="cube"
               size={24}
@@ -52,7 +52,7 @@ export default function TabLayout() {
         name="settings"
         options={{
           title: "Settings",
-          tabBarIcon: ({ color }) => (
+          tabBarIcon: ({ color }: { color: string }) => (
             <Ionicons
               name="settings"
               size={24}

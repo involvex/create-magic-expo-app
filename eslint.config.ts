@@ -1,9 +1,9 @@
-import pluginReact from "eslint-plugin-react";
+import * as pluginReact from "eslint-plugin-react";
 import { defineConfig } from "eslint/config";
 import tseslint from "typescript-eslint";
+import * as globals from "globals";
+import * as js from "@eslint/js";
 import css from "@eslint/css";
-import globals from "globals";
-import js from "@eslint/js";
 
 const reactConfig = pluginReact.configs.flat.recommended;
 

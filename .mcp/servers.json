@@ -2,7 +2,9 @@
   "mcpServers": {
     "node": {
       "command": "node",
-      "args": ["--loader=@modelcontextprotocol/server-node/bin/main.js"],
+      "args": [
+        "--loader=@modelcontextprotocol/server-node/bin/main.js"
+      ],
       "env": {
         "NODE_PATH": "./node_modules"
       },
@@ -10,21 +12,40 @@
     },
     "context7": {
       "command": "docker",
-      "args": ["run", "-i", "--rm", "mcp/context7"]
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "mcp/context7"
+      ]
     },
     "sequentialthinking": {
       "command": "docker",
-      "args": ["run", "-i", "--rm", "mcp/sequentialthinking"]
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "mcp/sequentialthinking"
+      ]
     },
     "filesystem": {
       "command": "npx",
-      "args": ["@modelcontextprotocol/server-filesystem@latest", "."],
+      "args": [
+        "@modelcontextprotocol/server-filesystem@latest",
+        "."
+      ],
       "disabled": false
     },
     "git": {
       "command": "npx",
-      "args": ["@modelcontextprotocol/server-git@latest", "."],
-      "disabled": false
+      "args": [
+        "@modelcontextprotocol/server-git@latest",
+        "."
+      ],
+      "disabled": false,
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
+      }
     }
   },
   "description": "MCP servers for youtube-music-cli development. Node server provides runtime analysis, filesystem for file operations, and git for version control integration."

@@ -65,31 +65,20 @@ jobs:
           bun audit 2>&1 | tail -30 >> $GITHUB_STEP_SUMMARY || echo "No audit output" >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "> **Note:** 1 known high (minimatch ReDoS) is transitive via eas-cli/eslint/expo." >> $GITHUB_STEP_SUMMARY
-          echo "> Override forces \`minimatch@9.0.5\` (latest safe minor). Full fix requires \`>=10.2.1\` which breaks upstream API consumers." >> $GITHUB_STEP_SUMMARY
+          echo "> **Accepted risks:**" >> $GITHUB_STEP_SUMMARY
+          echo "> - **minimatch ReDoS (high):** transitive via eas-cli/eslint/expo. Override forces \`9.0.5\`. Full fix requires \`>=10.2.1\` which breaks upstream consumers." >> $GITHUB_STEP_SUMMARY
+          echo "> - **ajv ReDoS (moderate):** inside eslint@10 internals. Forcing ajv@8 override breaks ESLint's v6 API usage; accepted until ESLint fixes internally." >> $GITHUB_STEP_SUMMARY
 
   osv-scan:
     name: OSV vulnerability scan
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Run OSV Scanner
-        uses: google/osv-scanner-action@v2
-        with:
-          scan-args: |-
-            --lockfile=bun.lock
-            --format=sarif
-            --output=osv-results.sarif
-        continue-on-error: true
-
-      - name: Upload SARIF to GitHub Security tab
-        if: always()
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: osv-results.sarif
-          category: osv-scanner
+    uses: google/osv-scanner-action/.github/workflows/osv-scanner-reusable.yml@v2.3.3
+    with:
+      scan-args: |-
+        --lockfile=bun.lock
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
 
   lint-and-typecheck:
     name: Lint and typecheck
