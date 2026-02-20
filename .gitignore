@@ -65,5 +65,4 @@ packages/app/.expo
 .mcp.json
 .claude/settings.local.json
 .mcp/servers.json
-.mcp/servers.json
-.mcp/servers.json
+.mcp

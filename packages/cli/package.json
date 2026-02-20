@@ -4,11 +4,14 @@
   "description": "CLI tool for scaffolding professional Expo applications",
   "type": "module",
   "bin": {
-    "create-magic-expo-app": "./bin/create-magic-expo-app.js"
+    "create-magic-expo-app": "./dist/create-magic-expo-app.js"
   },
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch"
+    "prebuild": "bun run typecheck",
+    "build": "bun build bin/create-magic-expo-app.js --outfile dist/create-magic-expo-app.js --target node",
+    "dev": "bun run --watch bin/create-magic-expo-app.js",
+    "start": "bun run dist/create-magic-expo-app.js",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "chalk": "^5.4.1",

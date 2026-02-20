@@ -47,13 +47,13 @@ export default defineConfig([
           (pattern: string) => !pattern.includes(".css"),
         ),
         settings: {
-          ...(config.settings || {}),
+          ...config.settings,
           react: {
             version: "19.0",
           },
         },
         rules: {
-          ...(config.rules || {}),
+          ...config.rules,
           "react/react-in-jsx-scope": "off",
         },
       }))
@@ -66,7 +66,7 @@ export default defineConfig([
               react: { version: "19.0" },
             },
             rules: {
-              ...(reactConfig.rules || {}),
+              ...reactConfig.rules,
               "react/react-in-jsx-scope": "off",
               "@typescript-eslint/no-unused-vars": [
                 "warn",

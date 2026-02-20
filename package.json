@@ -12,12 +12,12 @@
   "type": "module",
   "types": "node",
   "bin": {
-    "create-magic-expo-app": "packages/cli/bin/create-magic-expo-app.js"
+    "create-magic-expo-app": "packages/cli/dist/create-magic-expo-app.js"
   },
   "files": [
     "Readme.md",
     "LICENSE",
-    "packages/cli/bin/create-magic-expo-app.js"
+    "packages/cli/dist/create-magic-expo-app.js"
   ],
   "workspaces": [
     "packages/*"
@@ -33,6 +33,7 @@
     "build:ui-components": "bun run -F @magic-expo/ui-components build",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "clean": "bun pm cache rm && rimraf node_modules",
+    "dev:cli": "bun run -F @magic-expo/cli dev",
     "format": "prettier . --write",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
