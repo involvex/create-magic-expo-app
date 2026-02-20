@@ -1,14 +1,23 @@
 {
   "name": "@magic-expo/ui-components",
   "version": "1.0.0",
-  "private": true,
   "description": "Reusable UI components for Magic Expo apps",
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch"
+    "build": "bun run build:js && bun run build:types",
+    "build:js": "bun build src/index.ts --outdir dist --format esm --external react --external react-native --external expo --external react-native-safe-area-context",
+    "build:types": "tsc -p tsconfig.build.json",
+    "clean": "rimraf dist",
+    "dev": "tsc -p tsconfig.build.json --watch",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "expo": "^56.0.0-canary-20260212-4f61309",
@@ -19,5 +28,9 @@
   "peerDependencies": {
     "react": "^19.0.0",
     "react-native": "^0.84.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

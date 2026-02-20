@@ -14,11 +14,11 @@
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": false,
     "noEmit": true,
-
+    "rewriteRelativeImportExtensions": true,
     // Path aliases
-    "baseUrl": ".",
+    "rootDir": ".",
     "paths": {
-      "@/*": ["packages/app/src/*"]
+      "@/*": ["./packages/app/src/*"]
     },
 
     // Best practices

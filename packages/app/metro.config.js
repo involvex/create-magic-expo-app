@@ -1,11 +1,8 @@
 const { getDefaultConfig } = require("expo/metro-config");
-const { withUniwindConfig } = require("uniwind/metro"); // make sure this import exists
+const { withUniwindConfig } = require("uniwind/metro");
 
 /** @type {import('expo/metro-config').MetroConfig} */
 const config = getDefaultConfig(__dirname);
-
-// Add uppercase .PNG extension to assetExts
-config.resolver.assetExts = [...config.resolver.assetExts, "PNG"];
 
 // Apply uniwind modifications before exporting
 const uniwindConfig = withUniwindConfig(config, {
