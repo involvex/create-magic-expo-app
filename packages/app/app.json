@@ -22,6 +22,12 @@
         "foregroundImage": "../../assets/icon.PNG",
         "backgroundColor": "#ffffff"
       }
+    },
+    "extra": {
+      "oauth": {
+        "googleClientId": "YOUR_GOOGLE_CLIENT_ID",
+        "githubClientId": "YOUR_GITHUB_CLIENT_ID"
+      }
     }
   }
 }

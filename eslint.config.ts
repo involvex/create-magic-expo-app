@@ -76,10 +76,6 @@ export default defineConfig([
                   caughtErrorsIgnorePattern: "^_",
                 },
               ],
-              "@typescript-eslint/no-require-imports": [
-                "warn",
-                { allow: ["metro\\.config\\.js"] },
-              ],
             },
           },
         ]

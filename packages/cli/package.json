@@ -1,7 +1,6 @@
 {
   "name": "@magic-expo/cli",
   "version": "1.0.0",
-  "private": true,
   "description": "CLI tool for scaffolding professional Expo applications",
   "type": "module",
   "bin": {

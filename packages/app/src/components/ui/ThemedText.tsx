@@ -1,11 +1,8 @@
-import { Text, type TextProps } from "react-native";
-
-type Variant = "h1" | "h2" | "h3" | "body" | "caption";
-type Color = "primary" | "secondary" | "accent" | "default";
+import { Text, TextProps } from "react-native";
 
 interface ThemedTextProps extends TextProps {
-  variant?: Variant;
-  color?: Color;
+  variant?: "h1" | "h2" | "h3" | "body" | "caption";
+  color?: "primary" | "secondary" | "accent" | "default";
   className?: string;
 }
 
@@ -24,8 +21,16 @@ const colorClasses = {
   default: "text-gray-900 dark:text-white",
 };
 
-export function ThemedText({ variant = "body", color = "default", className = "", ...props }: ThemedTextProps) {
+export function ThemedText({
+  variant = "body",
+  color = "default",
+  className = "",
+  ...props
+}: ThemedTextProps) {
   return (
-    <Text className={`${variantClasses[variant]} ${colorClasses[color]} ${className}`} {...props} />
+    <Text
+      className={`${variantClasses[variant]} ${colorClasses[color]} ${className}`}
+      {...props}
+    />
   );
 }

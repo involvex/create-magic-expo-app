@@ -5,5 +5,10 @@ interface ThemedViewProps extends ViewProps {
 }
 
 export function ThemedView({ className = "", ...props }: ThemedViewProps) {
-  return <View className={`bg-background dark:bg-black ${className}`} {...props} />;
+  return (
+    <View
+      className={`bg-background dark:bg-black ${className}`}
+      {...props}
+    />
+  );
 }

@@ -3,10 +3,26 @@ import { ThemedText } from "@/components/ui/ThemedText";
 import { Card } from "@/components/ui/Card";
 
 const features = [
-  { emoji: "🎨", title: "Theme System", description: "Light/dark mode with automatic switching" },
-  { emoji: "🧭", title: "Navigation", description: "Expo Router file-based routing" },
-  { emoji: "🧩", title: "UI Components", description: "Reusable themed components" },
-  { emoji: "⚙️", title: "Config Package", description: "Shared ESLint, TypeScript, Prettier" },
+  {
+    emoji: "🎨",
+    title: "Theme System",
+    description: "Light/dark mode with automatic switching",
+  },
+  {
+    emoji: "🧭",
+    title: "Navigation",
+    description: "Expo Router file-based routing",
+  },
+  {
+    emoji: "🧩",
+    title: "UI Components",
+    description: "Reusable themed components",
+  },
+  {
+    emoji: "⚙️",
+    title: "Config Package",
+    description: "Shared ESLint, TypeScript, Prettier",
+  },
 ];
 
 function FeatureCard({
@@ -22,7 +38,12 @@ function FeatureCard({
     <Card>
       <View className="items-start gap-3">
         <ThemedText variant="h2">{emoji}</ThemedText>
-        <ThemedText variant="h3" className="mb-1">{title}</ThemedText>
+        <ThemedText
+          variant="h3"
+          className="mb-1"
+        >
+          {title}
+        </ThemedText>
         <ThemedText variant="caption">{description}</ThemedText>
       </View>
     </Card>
@@ -35,8 +56,16 @@ export default function HomeScreen() {
       <View className="p-6 pt-16">
         {/* Header */}
         <View className="mb-8 items-center">
-          <ThemedText variant="h1" className="mb-3">🚀 Magic Expo</ThemedText>
-          <ThemedText variant="body" className="text-center text-gray-500 dark:text-gray-400">
+          <ThemedText
+            variant="h1"
+            className="mb-3"
+          >
+            🚀 Magic Expo
+          </ThemedText>
+          <ThemedText
+            variant="body"
+            className="text-center text-gray-500 dark:text-gray-400"
+          >
             Create professional Expo apps with{" "}
             <ThemedText color="primary">style and speed</ThemedText>
           </ThemedText>
@@ -44,7 +73,7 @@ export default function HomeScreen() {
 
         {/* Features */}
         <View className="gap-4 mb-8">
-          {features.map((feature) => (
+          {features.map(feature => (
             <FeatureCard
               key={feature.title}
               emoji={feature.emoji}
@@ -56,8 +85,18 @@ export default function HomeScreen() {
 
         {/* CTA */}
         <Pressable className="bg-primary rounded-xl p-5 items-center">
-          <ThemedText variant="caption" className="text-white mb-2">Try the CLI:</ThemedText>
-          <ThemedText variant="h3" className="text-white font-mono">bunx create-magic-expo-app my-app</ThemedText>
+          <ThemedText
+            variant="caption"
+            className="text-white mb-2"
+          >
+            Try the CLI:
+          </ThemedText>
+          <ThemedText
+            variant="h3"
+            className="text-white font-mono"
+          >
+            bunx create-magic-expo-app my-app
+          </ThemedText>
         </Pressable>
       </View>
     </ScrollView>
