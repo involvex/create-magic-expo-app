@@ -1,12 +1,49 @@
-import { View, ScrollView, Pressable } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { View, ScrollView, Pressable, Switch } from "react-native";
 import { ThemedText } from "@/components/ui/ThemedText";
+import { useToast } from "@/contexts/ToastContext";
 import { useTheme } from "@/contexts/ThemeContext";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/Button";
 import { Ionicons } from "@expo/vector-icons";
 import { Card } from "@/components/ui/Card";
 
 type ThemeMode = "light" | "dark" | "system";
+type SettingsKey =
+  | "notificationsEnabled"
+  | "marketingNotifications"
+  | "productUpdates";
+type AppSettings = Record<SettingsKey, boolean>;
+
+const SETTINGS_STORAGE_KEY = "@app_settings";
+const DEFAULT_SETTINGS: AppSettings = {
+  notificationsEnabled: true,
+  marketingNotifications: false,
+  productUpdates: true,
+};
+
+const settingItems: {
+  key: SettingsKey;
+  label: string;
+  description: string;
+}[] = [
+  {
+    key: "notificationsEnabled",
+    label: "Push notifications",
+    description: "Enable push notifications for important activity.",
+  },
+  {
+    key: "marketingNotifications",
+    label: "Marketing notifications",
+    description: "Receive occasional product tips and launch updates.",
+  },
+  {
+    key: "productUpdates",
+    label: "Product updates",
+    description: "Get notified when new features are released.",
+  },
+];
 
 const themeOptions: {
   value: ThemeMode;
@@ -21,6 +58,70 @@ const themeOptions: {
 export default function SettingsScreen() {
   const { themeMode, setThemeMode, colorScheme } = useTheme();
   const { user, signIn, signOut, isLoading } = useAuth();
+  const { showToast } = useToast();
+  const [settings, setSettings] = useState<AppSettings>(DEFAULT_SETTINGS);
+  const [settingsLoading, setSettingsLoading] = useState(true);
+
+  useEffect(() => {
+    const loadSettings = async () => {
+      try {
+        const stored = await AsyncStorage.getItem(SETTINGS_STORAGE_KEY);
+        if (!stored) return;
+        const parsed = JSON.parse(stored) as Partial<AppSettings>;
+        setSettings(prev => ({ ...prev, ...parsed }));
+      } catch (error) {
+        console.error("Failed to load settings:", error);
+      } finally {
+        setSettingsLoading(false);
+      }
+    };
+
+    loadSettings();
+  }, []);
+
+  const persistSettings = async (nextSettings: AppSettings) => {
+    setSettings(nextSettings);
+    try {
+      await AsyncStorage.setItem(
+        SETTINGS_STORAGE_KEY,
+        JSON.stringify(nextSettings),
+      );
+    } catch (error) {
+      console.error("Failed to save settings:", error);
+      showToast("Failed to save settings", "error");
+    }
+  };
+
+  const updateSetting = async (key: SettingsKey, value: boolean) => {
+    const nextSettings = { ...settings, [key]: value };
+    await persistSettings(nextSettings);
+    showToast(
+      `${value ? "Enabled" : "Disabled"} ${key.replace(/([A-Z])/g, " $1").toLowerCase()}`,
+      "info",
+    );
+  };
+
+  const resetDefaults = async () => {
+    await persistSettings(DEFAULT_SETTINGS);
+    showToast("Restored default settings", "success");
+  };
+
+  const clearAppCaches = async () => {
+    try {
+      await AsyncStorage.multiRemove([
+        SETTINGS_STORAGE_KEY,
+        "@app_theme_mode",
+        "@app_user",
+      ]);
+      await signOut();
+      setThemeMode("system");
+      setSettings(DEFAULT_SETTINGS);
+      showToast("Cleared app cache and reset defaults", "success");
+    } catch (error) {
+      console.error("Failed to clear caches:", error);
+      showToast("Failed to clear caches", "error");
+    }
+  };
 
   return (
     <ScrollView className="flex-1 bg-white dark:bg-black">
@@ -49,6 +150,9 @@ export default function SettingsScreen() {
                 <View>
                   <ThemedText variant="body">{user.name}</ThemedText>
                   <ThemedText variant="caption">{user.email}</ThemedText>
+                  <ThemedText variant="caption">
+                    Provider: {user.provider}
+                  </ThemedText>
                 </View>
               </View>
               <Button
@@ -62,18 +166,21 @@ export default function SettingsScreen() {
           ) : (
             <View className="gap-2">
               <Button
-                onPress={() => signIn("google")}
-                disabled={isLoading}
-              >
-                Sign in with Google
-              </Button>
-              <Button
-                variant="secondary"
                 onPress={() => signIn("github")}
                 disabled={isLoading}
               >
                 Sign in with GitHub
               </Button>
+              <Button
+                variant="secondary"
+                onPress={() => signIn("discord")}
+                disabled={isLoading}
+              >
+                Sign in with Discord
+              </Button>
+              <ThemedText variant="caption">
+                OAuth sample flow is mocked for local development.
+              </ThemedText>
             </View>
           )}
         </Card>
@@ -123,6 +230,60 @@ export default function SettingsScreen() {
           </ThemedText>
         </Card>
 
+        {/* Notifications Card */}
+        <Card>
+          <ThemedText
+            variant="h3"
+            className="mb-4"
+          >
+            Notifications
+          </ThemedText>
+          <View className="gap-4">
+            {settingItems.map(item => (
+              <View
+                key={item.key}
+                className="flex-row items-start justify-between gap-4"
+              >
+                <View className="flex-1">
+                  <ThemedText variant="body">{item.label}</ThemedText>
+                  <ThemedText variant="caption">{item.description}</ThemedText>
+                </View>
+                <Switch
+                  value={settings[item.key]}
+                  onValueChange={value => updateSetting(item.key, value)}
+                  disabled={settingsLoading || isLoading}
+                />
+              </View>
+            ))}
+          </View>
+        </Card>
+
+        {/* Maintenance Card */}
+        <Card>
+          <ThemedText
+            variant="h3"
+            className="mb-4"
+          >
+            Maintenance
+          </ThemedText>
+          <View className="gap-3">
+            <Button
+              variant="ghost"
+              onPress={resetDefaults}
+              disabled={settingsLoading}
+            >
+              Reset to defaults
+            </Button>
+            <Button
+              variant="danger"
+              onPress={clearAppCaches}
+              disabled={isLoading}
+            >
+              Clear caches and session
+            </Button>
+          </View>
+        </Card>
+
         {/* About Card */}
         <Card>
           <ThemedText
@@ -139,6 +300,14 @@ export default function SettingsScreen() {
             <View className="flex-row justify-between">
               <ThemedText variant="caption">Expo SDK</ThemedText>
               <ThemedText variant="caption">55</ThemedText>
+            </View>
+            <View className="flex-row justify-between">
+              <ThemedText variant="caption">Navigation</ThemedText>
+              <ThemedText variant="caption">Tabs</ThemedText>
+            </View>
+            <View className="flex-row justify-between">
+              <ThemedText variant="caption">Theme mode</ThemedText>
+              <ThemedText variant="caption">{themeMode}</ThemedText>
             </View>
           </View>
         </Card>

@@ -1,6 +1,5 @@
 {
   "name": "create-magic-expo-app",
-  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/involvex/create-magic-expo-app"

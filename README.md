@@ -8,6 +8,27 @@ Monorepo foundation for a CLI that scaffolds professional Expo apps with Bun, Ex
 - A `packages/app` starter that shows Expo Router + Uniwind in action (see `packages/app/src/app` for the navigation layout and welcome screen).
 - Companion docs (`docs/index.html`, the GH Pages site, this README, and `Plan.md`) that explain the architecture, automation, and how to scale the CLI over time.
 
+## App showcase highlights
+
+- **Tabbed navigation out of the box:** the demo app ships with a working tabs layout and feature screens.
+- **Theme switching that persists:** settings supports light, dark, and system mode with saved preference.
+- **Default settings profile:** notification preferences load with sensible defaults and persist across sessions.
+- **Maintenance actions:** users can reset defaults and clear cached app/session state from the settings screen.
+- **Sample OAuth experience:** GitHub and Discord sign-in buttons demonstrate a local sample OAuth flow.
+
+## CLI usage patterns
+
+- Interactive starter:
+  - `npx create-magic-expo-app myapp`
+- Fast minimum template (skip prompts):
+  - `npx create-magic-expo-app myapp -y`
+- Showcase template with explicit options:
+  - `npx create-magic-expo-app myapp --template showcase --navigation tabs --build-provider local`
+- Start generated app locally:
+  - `cd myapp && bun run start`
+- Local-first Android build path:
+  - `bun run android` or `bun run build:local`
+
 ## Technology spotlight
 
 - **Runtime & tooling:** Bun, TypeScript, Expo SDK 56 canary, Expo Router, React 19.2.3, React Native 0.84.
@@ -18,6 +39,7 @@ Monorepo foundation for a CLI that scaffolds professional Expo apps with Bun, Ex
 
 - View the live docs at `https://involvex.github.io/create-magic-expo-app/`. The modern material-style site pulls the latest changelog, links to the implementation plan, and highlights the security & funding essential information.
 - Read through `Plan.md` for the current roadmap and architecture breakdown, then revisit the docs site to see those ideas rendered with sticky nav, responsive layouts, and changelog summaries.
+- The docs theme toggle now mirrors app behavior with **system / light / dark** modes so docs and app usage stay aligned.
 
 ## Testing
 

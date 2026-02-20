@@ -1,17 +1,19 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as AuthSession from "expo-auth-session";
 
 interface User {
   id: string;
   email: string;
   name: string;
+  provider: "github" | "discord";
   avatar?: string;
 }
 
 interface AuthContextType {
   user: User | null;
   isLoading: boolean;
-  signIn: (provider: "google" | "github" | "apple") => Promise<void>;
+  signIn: (provider: "github" | "discord") => Promise<void>;
   signOut: () => Promise<void>;
 }
 
@@ -52,15 +54,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const signIn = async (provider: "google" | "github" | "apple") => {
+  const createSampleOAuthCode = async (provider: "github" | "discord") => {
+    const redirectUri = AuthSession.makeRedirectUri({
+      path: "oauth/callback",
+    });
+    await new Promise(resolve => setTimeout(resolve, 350));
+    const scope = provider === "github" ? "read:user" : "identify";
+    return `${provider}:${scope}:${redirectUri}:${Date.now()}`;
+  };
+
+  const signIn = async (provider: "github" | "discord") => {
     setIsLoading(true);
     try {
-      // TODO: Implement actual OAuth flow
-      // For now, mock the response
+      const oauthCode = await createSampleOAuthCode(provider);
+      const providerName = provider === "github" ? "GitHub" : "Discord";
       const mockUser: User = {
-        id: "123",
+        id: oauthCode,
         email: `user@${provider}.com`,
-        name: `${provider.charAt(0).toUpperCase() + provider.slice(1)} User`,
+        name: `${providerName} User`,
+        provider,
       };
       setUser(mockUser);
       await saveUser(mockUser);
