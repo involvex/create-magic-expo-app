@@ -70,3 +70,4 @@ packages/app/ios
 .claude/settings.local.json
 .mcp/servers.json
 .mcp
+.bun-cache

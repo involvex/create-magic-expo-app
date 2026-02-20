@@ -11,8 +11,7 @@ registry = "https://registry.npmjs.org/"
 # Use hardlink backend to reduce virtual-package duplication warnings from expo-doctor
 backend = "hardlink"
 
-# Cache directory - use shorter path to avoid Android build path length issues
-cache = "D:\\temp\\bun"
+# Use Bun default cache location for cross-platform compatibility.
 
 [test]
 # Test runner configuration

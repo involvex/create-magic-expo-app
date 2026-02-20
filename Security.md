@@ -2,9 +2,9 @@
 
 ## Automated guardrails
 
-- `bun audit --audit-level=moderate` (run locally or rely on the `security` workflow) keeps dependency vulnerabilities visible.
-- `.github/dependabot.yml` tracks Bun dependencies and GitHub Actions updates every week; expect Dependabot PRs to land before issues reach production.
-- The GitHub Actions security workflow (`.github/workflows/security.yml`) runs `bun audit`, `bun run lint`, `bun run typecheck`, and `bun run build:app` on every push to `main`.
+- `bun audit --audit-level=critical` is the hard CI gate; known high/moderate transitive findings stay visible in reports.
+- `.github/dependabot.yml` tracks GitHub Actions updates; Bun dependency risk is monitored via `bun audit` and OSV scanning.
+- The GitHub Actions security workflow (`.github/workflows/security.yml`) runs Bun audit, OSV SARIF reporting, linting, and type checking on push/PR/schedule.
 
 ## Manual verification
 

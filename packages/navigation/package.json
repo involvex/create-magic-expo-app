@@ -17,6 +17,7 @@
     "build:types": "tsc -p tsconfig.build.json",
     "clean": "rimraf dist",
     "dev": "tsc -p tsconfig.build.json --watch",
+    "test": "bunx vitest run --root ../../ --config vitest.config.ts packages/navigation/src",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

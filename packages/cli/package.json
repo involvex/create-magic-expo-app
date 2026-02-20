@@ -11,6 +11,7 @@
     "build": "bun build bin/create-magic-expo-app.js --outfile dist/create-magic-expo-app.js --target node",
     "dev": "bun run --watch bin/create-magic-expo-app.js",
     "start": "bun run dist/create-magic-expo-app.js",
+    "test": "bunx vitest run --root ../../ --config vitest.config.ts packages/cli/src",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

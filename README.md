@@ -19,6 +19,14 @@ Monorepo foundation for a CLI that scaffolds professional Expo apps with Bun, Ex
 - View the live docs at `https://involvex.github.io/create-magic-expo-app/`. The modern material-style site pulls the latest changelog, links to the implementation plan, and highlights the security & funding essential information.
 - Read through `Plan.md` for the current roadmap and architecture breakdown, then revisit the docs site to see those ideas rendered with sticky nav, responsive layouts, and changelog summaries.
 
+## Testing
+
+- Run smoke tests across active workspaces with `bun run test:packages`.
+- Run all Vitest suites with `bun run test:run`.
+- Run local Maestro app smoke flow with:
+  - start app: `bun run -F @magic-expo/app start`
+  - run flow: `bun run test:maestro`
+
 ## Security & automation
 
 - Security checks run on every push to `main` via `.github/workflows/security.yml`, which audits dependencies (`bun audit`), lints, type checks, and builds the Expo workspace.

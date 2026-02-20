@@ -30,6 +30,10 @@ beforeEach(() => {
       type: "ActivityIndicator",
       props: { "data-testid": "activity-indicator" },
     }),
+    Modal: ({ children }: { children: React.ReactNode }) => ({
+      type: "Modal",
+      props: { children },
+    }),
     TextInput: ({
       onChange,
       value,
@@ -37,6 +41,12 @@ beforeEach(() => {
       onChange?: (text: string) => void;
       value?: string;
     }) => ({ type: "TextInput", props: { onChange, value } }),
+    StyleSheet: {
+      create: <T extends Record<string, unknown>>(styles: T) => styles,
+    },
+    Dimensions: {
+      get: () => ({ width: 390, height: 844 }),
+    },
     useColorScheme: () => "light",
     Platform: {
       OS: "web",
