@@ -83,6 +83,7 @@
         "create-magic-expo-app": "./dist/create-magic-expo-app.js",
       },
       "dependencies": {
+        "@magic-expo/templates": "workspace:*",
         "chalk": "^5.4.1",
         "eas-cli": "^14.3.0",
         "fs-extra": "^11.3.0",

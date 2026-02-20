@@ -7,3 +7,5 @@
 export { createProject } from "./create";
 export { promptUser, promptAdvanced } from "./prompts";
 export type { CreateOptions } from "./prompts";
+export { getHelpText, parseCliArgs, resolveCreateOptions } from "./args";
+export type { CliArgs } from "./args";

@@ -58,8 +58,9 @@ export function verifyScaffold(targetDir: string): boolean {
     "package.json",
     "app.json",
     "tsconfig.json",
-    "eslint.config.ts",
-    ".prettierrc",
+    "babel.config.js",
+    "src/app/_layout.tsx",
+    "src/app/index.tsx",
   ];
 
   for (const file of requiredFiles) {

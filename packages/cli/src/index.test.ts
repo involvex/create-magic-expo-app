@@ -11,5 +11,7 @@ describe("@magic-expo/cli exports", () => {
     expect(typeof mod.createProject).toBe("function");
     expect(typeof mod.promptUser).toBe("function");
     expect(typeof mod.promptAdvanced).toBe("function");
+    expect(typeof mod.parseCliArgs).toBe("function");
+    expect(typeof mod.resolveCreateOptions).toBe("function");
   });
 });

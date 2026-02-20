@@ -11,6 +11,21 @@ describe("@magic-expo/templates exports", () => {
     expect(rendered[0]?.content).toBe("Hello demo-app");
   });
 
+  it("creates minimum template with local-first defaults", async () => {
+    const mod = await import("./index");
+    const files = mod.getTemplate({
+      projectName: "demo-app",
+      template: mod.Templates.MINIMUM,
+      buildProvider: "eas",
+    });
+
+    const paths = files.map(file => file.path);
+    expect(paths).toContain("package.json");
+    expect(paths).toContain("src/app/index.tsx");
+    expect(paths).not.toContain("eas.json");
+    expect(paths).not.toContain("src/components/ui/Button.tsx");
+  });
+
   it("exposes scaffold utilities", async () => {
     const mod = await import("./index");
 
