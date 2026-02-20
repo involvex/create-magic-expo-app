@@ -5,16 +5,21 @@
     "orientation": "default",
     "web": {
       "output": "static",
-      "favicon": "../../assets/favicon.png"
+      "favicon": "../../assets/favicon.PNG"
     },
     "name": "create-magic-expo-app",
     "slug": "create-magic-expo-app",
-    "icon": "../../assets/icon.png",
+    "icon": "../../assets/icon.PNG",
+    "splash": {
+      "image": "../../assets/logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
     "plugins": ["expo-router"],
     "android": {
       "package": "com.involvex.createmagicexpoapp",
       "adaptiveIcon": {
-        "foregroundImage": "../../assets/icon.png",
+        "foregroundImage": "../../assets/icon.PNG",
         "backgroundColor": "#ffffff"
       }
     }

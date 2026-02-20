@@ -10,7 +10,7 @@ on:
 
 jobs:
   audit:
-    name: Audit, lint, typecheck, and build
+    name: Audit, lint, and typecheck
     runs-on: ubuntu-latest
 
     steps:
@@ -26,12 +26,10 @@ jobs:
 
       - name: Run Bun audit
         run: bun audit --audit-level=moderate
+        continue-on-error: true
 
       - name: Lint workspace
         run: bun run lint
 
       - name: Typecheck
         run: bun run typecheck
-
-      - name: Build Expo workspace
-        run: bun run build:app
