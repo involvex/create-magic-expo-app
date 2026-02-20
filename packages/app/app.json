@@ -10,7 +10,6 @@
     "name": "create-magic-expo-app",
     "slug": "create-magic-expo-app",
     "icon": "../../assets/icon.png",
-    "newArchEnabled": true,
     "plugins": ["expo-router"],
     "android": {
       "package": "com.involvex.createmagicexpoapp",
