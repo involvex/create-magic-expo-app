@@ -12,8 +12,13 @@
   "type": "module",
   "types": "node",
   "bin": {
-    "create-magic-expo-app": "./packages/cli/bin/create-magic-expo-app.js"
+    "create-magic-expo-app": "./packages/cli/dist/create-magic-expo-app.js"
   },
+  "files": [
+    "packages/cli/dist/create-magic-expo-app.js",
+    "Readme.md",
+    "config/dist/index.js"
+  ],
   "workspaces": [
     "packages/*"
   ],

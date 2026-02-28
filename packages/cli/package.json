@@ -5,10 +5,10 @@
   "description": "CLI tool for scaffolding professional Expo applications",
   "type": "module",
   "bin": {
-    "create-magic-expo-app": "./bin/create-magic-expo-app.js"
+    "create-magic-expo-app": "./dist/create-magic-expo-app.js"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "bun build bin/create-magic-expo-app.js --outdir dist --include=\"src/**/*\"  --target node",
     "dev": "tsc --watch"
   },
   "dependencies": {
