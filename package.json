@@ -17,7 +17,12 @@
   "files": [
     "packages/cli/dist/create-magic-expo-app.js",
     "Readme.md",
-    "config/dist/index.js"
+    "config/dist/*",
+    "cli/dist/*",
+    "navigation/dist/*",
+    "templates/dist/*",
+    "theming/dist/*",
+    "ui-components/dist/*"
   ],
   "workspaces": [
     "packages/*"
