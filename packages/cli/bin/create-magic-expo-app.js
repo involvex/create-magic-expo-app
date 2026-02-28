@@ -1,5 +1,5 @@
 #!/usr/bin/env bun
-import { createProject, promptUser } from "../dist/index.js";
+import { createProject, promptUser } from "../src/index";
 import chalk from "chalk";
 
 console.log(chalk.cyan.bold("\n✨ Welcome to create-magic-expo-app!\n"));

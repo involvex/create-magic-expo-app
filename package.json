@@ -1,5 +1,5 @@
 {
-  "name": "create-magic-expo-app",
+  "name": "@involvex/create-magic-expo-app",
   "private": true,
   "repository": {
     "type": "git",
@@ -11,6 +11,9 @@
   },
   "type": "module",
   "types": "node",
+  "bin": {
+    "create-magic-expo-app": "./packages/cli/bin/create-magic-expo-app.js"
+  },
   "workspaces": [
     "packages/*"
   ],
